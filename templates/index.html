@@ -1,0 +1,92 @@
+<!--
+# MIT License
+#
+# Copyright (c) 2021 Christian Obersteiner
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+-->
+
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MKU 2424 B Control</title>
+</head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<body onload="getAllParameters();setInterval(function(){ getAllParameters();}, 5000);">
+<p class="title">MKU 2424 B Control</p>
+
+<form>
+    <table>
+      <tr><td colspan=2><h1>Status</h1></td></tr>
+      <tr><td colspan=2><span id="statusmessage"></td></tr>
+      <tr><td colspan=2><h3><span id="converter_state"></span></h3></td></tr>
+      <tr><td colspan=2><input type="button" value="ON" onclick='setData("converter_state", "1");'>
+        <input type="button" value="OFF" onclick='setData("converter_state", "0");'></td></tr>
+      <tr><td colspan=2></td></tr>
+      <tr>
+        <td class=descr>PLL Lock</td>
+        <td class=set><span id="pll_lock"></span></td>
+      </tr>
+      <tr>
+        <td class=descr>Forward Power</td>
+        <td class=set><span id="forward_power"></span> (ADC value 0...255)</td>
+      </tr>
+      <tr>
+        <td class=descr>Reverse Power</td>
+        <td class=set><span id="reverse_power"></span> (ADC value 0...255)</td>
+      </tr>
+      <tr>
+        <td class=descr>Converter Mode</td>
+        <td class=set><span id="converter_mode"></span></td>
+      </tr>
+      <tr>
+        <td class=descr>Temperature</td>
+        <td class=set><span id="temperature"></span> °C</td>
+      </tr>
+      <tr>
+        <td class=descr>LO Frequency</td>
+        <td class=set><span id="lo_frequency"></span></td>
+      </tr>
+      <tr>
+        <td class=descr>Software Version</td>
+        <td class=set><span id="software_version"></span></td>
+      </tr>
+
+  <table>
+    <tr><td><h1>API</h1></td></tr>
+    <tr><td><h2>Status readout</h2></td></tr>
+    <tr><td><a href="/get/converter_state">/get/converter_state</a></td></tr>
+    <tr><td><a href="/get/pll_lock">/get/pll_lock</a></td></tr>
+    <tr><td><a href="/get/converter_mode">/get/converter_mode</a></td></tr>
+    <tr><td><a href="/get/forward_power">/get/forward_power</a></td></tr>
+    <tr><td><a href="/get/reverse_power">/get/reverse_power</a></td></tr>
+    <tr><td><a href="/get/temperature">/get/temperature</a></td></tr>
+    <tr><td><a href="/get/software_version">/get/software_version</a></td></tr>
+    <tr><td><h2>Configuration</h2></td></tr>
+    <tr><td><a href="/set/converter_state/xx">/set/converter_state/[O0;O1]</a></td></tr>
+  </table>
+</form>
+
+v1.0 (C) 2021 DL1COM
+
+<div id="snackbar"></div>
+</body>
+</html>

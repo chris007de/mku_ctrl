@@ -1,0 +1,6 @@
+argparse
+flask
+pyjsend
+pytest
+pytest-flask
+pyserial
